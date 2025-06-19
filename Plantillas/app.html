@@ -1,0 +1,107 @@
+<div class="top-bar">
+  <img
+    src="Img/explorer-img.png"
+    alt="Logo"
+    style="position: absolute; left: 10px; top: 6px; height: 28px" />
+  <span
+    style="
+      display: inline-block;
+      line-height: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-left: 48px;
+    ">
+    File Explorer
+  </span>
+  <div class="boton-ventana" style="right: 40px">
+    <a class="ventana" href="#">□</a>
+  </div>
+  <div class="boton-cerrar">
+    <a class="cerrar" href="desktop.html">x</a>
+  </div>
+  <div class="boton-minimizar">
+    <a class="minimizar" href="desktop.html">-</a>
+  </div>
+</div>
+<div id="main-content"></div>
+
+<style>
+  .boton-cerrar {
+    background-color: red;
+    width: 40px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  .boton-ventana {
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  .boton-minimizar {
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 80px;
+    top: 0;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+  }
+  .minimizar {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .ventana {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .boton-cerrar .cerrar {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    line-height: 40px;
+  }
+  .cerrar {
+    color: white;
+    text-decoration: none;
+  }
+  #main-content {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    bottom: 40px;
+    background: #fff;
+    overflow: auto;
+    z-index: 1;
+    border: 1px solid #000;
+    border-top: none;
+    box-sizing: border-box;
+  }
+</style>

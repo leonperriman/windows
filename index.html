@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WINDOWS</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      ">
+      <img id="logo-inicio" src="Img/windows-11-logo.png" />
+      <img id="logo-cargando" src="Img/windows11-loading.gif" />
+    </div>
+  </body>
+  <script>
+    setTimeout(function () {
+      window.location.href = "login.html";
+    }, 10000);
+  </script>
+  <style>
+    body {
+      background-color: #000;
+    }
+    #logo-inicio {
+      width: 150px;
+      display: block;
+      margin: 40px auto;
+    }
+    #logo-cargando {
+      width: 50px;
+      display: block;
+      margin: 200px auto 0 auto;
+    }
+  </style>
+</html>
