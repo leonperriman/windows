@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WINDOWS - DESKTOP</title>
+  </head>
+  <body>
+    <div class="white-square">
+      <input class="buscar" placeholder="Search" />
+      <div>
+        <h4
+          style="
+            margin-left: 45px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          ">
+          Anclado
+        </h4>
+        <button style="float: right; margin-top: -40px; margin-right: 45px">
+          Todos &gt;
+        </button>
+        <div
+          style="
+            margin-left: 45px;
+            margin-right: 45px;
+            width: 100%;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+            align-items: center;
+            height: 60px;
+          ">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-right: 32px;
+            ">
+            <a href="google_chrome.html">
+              <img
+                src="Img/chrome-icon.png"
+                style="width: 32px; height: 32px" />
+            </a>
+            <span
+              style="
+                font-size: 12px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              ">
+              Chrome
+            </span>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-right: 32px;
+            ">
+            <a href="explorer.html">
+              <img
+                src="Img/explorer-img.png"
+                style="width: 32px; height: 32px" />
+            </a>
+            <span
+              style="
+                font-size: 12px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              ">
+              Explorer
+            </span>
+          </div>
+          <div
+            style="display: flex; flex-direction: column; align-items: center">
+            <img src="Img/msstore-logo.png" style="width: 32px; height: 32px" />
+            <span
+              style="
+                font-size: 12px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              ">
+              Store
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <a href="desktop.html">
+        <img
+          src="Img/windows-11-logo.png"
+          alt="Windows 11 Logo"
+          style="height: 28px; width: auto" />
+      </a>
+      <div style="position: relative; display: inline-block">
+        <input id="busqueda" placeholder="Search" style="padding-left: 28px" />
+        <img
+          src="Img/lupa.png"
+          alt="Buscar"
+          style="
+            position: absolute;
+            left: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+          " />
+      </div>
+      <a href="google_chrome.html">
+        <img id="chrome-icon" src="Img/chrome-icon.png" />
+      </a>
+      <a href="explorer.html">
+        <img id="explorer-icon" src="Img/explorer-img.png" />
+      </a>
+      <img id="msstore-icon" src="Img/msstore-logo.png" />
+    </div>
+  </body>
+  <style>
+    body {
+      background-image: url("Img/Background-Desktop.jpg");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .buscar {
+      width: 80%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 100px;
+      font-size: 14px;
+      background-color: #ffffff;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .white-square {
+      position: fixed;
+      left: 50%;
+      bottom: 70px; /* Ajusta según la altura de tu bottom-bar */
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+    }
+    .bottom-bar {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      background: rgb(255, 255, 255);
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .bottom-bar > * {
+      height: 28px;
+      margin: 0 8px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    #busqueda {
+      width: 50px;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 100px;
+      font-size: 14px;
+      background-color: #ffffff;
+    }
+    #chrome-icon {
+      height: 28px;
+      width: auto;
+    }
+
+    #explorer-icon {
+      height: 28px;
+      width: auto;
+    }
+  </style>
+</html>
