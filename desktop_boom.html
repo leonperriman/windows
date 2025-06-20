@@ -6,7 +6,28 @@
     <title>WINDOWS - DESKTOP</title>
   </head>
   <body>
-    <a href="desktop_boom.html">
+    <script>
+      function spawnImage() {
+        const img = document.createElement("img");
+        img.src = "Img/Generic_error_message.png";
+        img.style.position = "fixed";
+        img.style.width = "300px";
+        img.style.height = "200px";
+        img.style.left = Math.random() * (window.innerWidth - 48) + "px";
+        img.style.top = Math.random() * (window.innerHeight - 48) + "px";
+        img.style.zIndex = 999;
+        img.style.pointerEvents = "none";
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 5000);
+      }
+
+      setInterval(spawnImage, 100);
+
+      setTimeout(function () {
+        window.location.href = "blue-screen.html";
+      }, 10000);
+    </script>
+    <a>
       <div
         style="
           display: flex;
