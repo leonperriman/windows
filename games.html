@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WINDOWS - GAMES</title>
+  </head>
+  <body>
+    <div class="top-bar">
+      <img
+        src="Img/logo-games.png"
+        alt="Logo"
+        style="position: absolute; left: 10px; top: 6px; height: 28px" />
+      <span
+        style="
+          display: inline-block;
+          line-height: 40px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          margin-left: 48px;
+        ">
+        Games
+      </span>
+      <div class="boton-ventana" style="right: 40px">
+        <a class="ventana" href="#">□</a>
+      </div>
+      <div class="boton-cerrar">
+        <a class="cerrar" href="desktop.html">x</a>
+      </div>
+      <div class="boton-minimizar">
+        <a class="minimizar" href="desktop.html">-</a>
+      </div>
+    </div>
+    <div id="main-content">
+      <iframe
+        src="https://poki.com/es/online"
+        style="width: 100%; height: 100%; border: none"></iframe>
+    </div>
+    <div class="bottom-bar">
+      <a href="desktop-menu.html">
+        <img
+          src="Img/windows-11-logo.png"
+          alt="Windows 11 Logo"
+          style="height: 28px; width: auto" />
+      </a>
+      <div style="position: relative; display: inline-block">
+        <input id="busqueda" placeholder="Search" style="padding-left: 28px" />
+        <img
+          src="Img/lupa.png"
+          alt="Buscar"
+          style="
+            position: absolute;
+            left: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+          " />
+      </div>
+      <a href="google_chrome.html">
+        <img id="chrome-icon" src="Img/chrome-icon.png" />
+      </a>
+      <img id="explorer-icon" src="Img/explorer-img.png" />
+      <img id="msstore-icon" src="Img/msstore-logo.png" />
+    </div>
+  </body>
+  <style>
+    .boton-cerrar {
+      background-color: red;
+      width: 40px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      font-size: 20px;
+      user-select: none;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+    .boton-ventana {
+      background-color: rgb(255, 255, 255);
+      width: 40px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      font-size: 20px;
+      user-select: none;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+    .boton-minimizar {
+      background-color: rgb(255, 255, 255);
+      width: 40px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 80px;
+      top: 0;
+      cursor: pointer;
+      font-size: 20px;
+      user-select: none;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+    .minimizar {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+    }
+    .ventana {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+    }
+    .boton-cerrar .cerrar {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+      line-height: 40px;
+    }
+    .cerrar {
+      color: white;
+      text-decoration: none;
+    }
+    #main-content {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      bottom: 40px;
+      background: #fff;
+      overflow: auto;
+      z-index: 1;
+      border: 1px solid #000;
+      border-top: none;
+      box-sizing: border-box;
+    }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: #fff;
+      border: 1px solid #000;
+      z-index: 1001;
+      box-sizing: border-box;
+    }
+    .bottom-bar {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      background: rgb(255, 255, 255);
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .bottom-bar > * {
+      height: 28px;
+      margin: 0 8px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    #busqueda {
+      width: 50px;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      border-radius: 100px;
+      font-size: 14px;
+      background-color: #ffffff;
+    }
+    #chrome-icon {
+      height: 28px;
+      width: auto;
+    }
+  </style>
+</html>
