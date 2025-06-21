@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WINDOWS - BIOS</title>
+    <style>
+      body {
+        margin: 0;
+        background: black;
+        color: #00ff00;
+        font-family: "Lucida Console", Monaco, monospace;
+        user-select: none;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #biosScreen {
+        width: 720px;
+        height: 480px;
+        border: 4px solid #00ff00;
+        padding: 20px;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        outline: none;
+      }
+      #titleBar {
+        font-weight: bold;
+        font-size: 20px;
+        border-bottom: 2px solid #00ff00;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+      }
+      #menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 16px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      #menu li {
+        padding: 6px 12px;
+        border: 1px solid transparent;
+        cursor: default;
+      }
+      #menu li.selected {
+        background-color: #00ff00;
+        color: black;
+      }
+      .cursor {
+        display: inline-block;
+        width: 10px;
+        height: 16px;
+        background: #00ff00;
+        animation: blink 1s steps(1) infinite;
+        margin-right: 6px;
+      }
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+      #infoScreen {
+        flex-grow: 1;
+        white-space: pre-wrap;
+        overflow-y: auto;
+        font-family: "Lucida Console", monospace;
+        font-size: 16px;
+        padding: 10px;
+        border: 2px solid #00ff00;
+        box-sizing: border-box;
+        color: #00ff00;
+        display: none;
+      }
+      #footer {
+        border-top: 2px solid #00ff00;
+        padding-top: 10px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        user-select: none;
+      }
+      #footer.hidden {
+        display: none;
+      }
+      #achievementScreen {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        border: 4px solid #00ff00;
+        background: black;
+        color: #00ff00;
+        font-family: "Lucida Console", monospace;
+        font-size: 18px;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 10;
+        user-select: none;
+      }
+      #achievementScreen.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="biosScreen" tabindex="0" aria-label="BIOS Setup Utility">
+      <div id="titleBar">BIOS Setup Utility</div>
+
+      <ul id="menu" role="listbox" aria-activedescendant="item-0">
+        <li id="item-0" role="option" aria-selected="true">
+          <span class="cursor"></span>
+          System Information
+        </li>
+        <li id="item-1" role="option" aria-selected="false">
+          Advanced BIOS Features
+        </li>
+        <li id="item-2" role="option" aria-selected="false">
+          Power Management Setup
+        </li>
+        <li id="item-3" role="option" aria-selected="false">
+          Boot Device Priority
+        </li>
+        <li id="item-4" role="option" aria-selected="false">
+          Integrated Peripherals
+        </li>
+        <li id="item-5" role="option" aria-selected="false">
+          PC Health Status
+        </li>
+        <li id="item-6" role="option" aria-selected="false">
+          Save & Exit Setup
+        </li>
+      </ul>
+
+      <pre id="infoScreen"></pre>
+
+      <div id="footer">
+        <span>Use ↑ ↓ to move, Enter to select</span>
+        <span>ESC: Back or Exit</span>
+      </div>
+
+      <div id="achievementScreen">
+        🎉 ACHIEVEMENT UNLOCKED! 🎉
+        <br />
+        <br />
+        <strong>¡Congrats! You enter to the BIOS Setup</strong>
+        <br />
+        <br />
+        <em>Press any key to continue...</em>
+      </div>
+    </div>
+
+    <script>
+      const biosScreen = document.getElementById("biosScreen");
+      const menu = document.getElementById("menu");
+      const menuItems = menu.querySelectorAll("li");
+      const infoScreen = document.getElementById("infoScreen");
+      const footer = document.getElementById("footer");
+      const achievementScreen = document.getElementById("achievementScreen");
+      let selectedIndex = 0;
+      let inInfoView = false;
+      let achievementShown = true;
+
+      const detailedDescriptions = [
+        `System Information:
+
+Detailed info about CPU, memory, BIOS version, and system date/time.
+Here you can check your hardware overview.`,
+        `Advanced BIOS Features:
+
+Configure CPU options, virtualization support, boot options,
+and other advanced settings for your system.`,
+        `Power Management Setup:
+
+Manage power saving features including suspend modes,
+ACPI settings, and wake-up events.`,
+        `Boot Device Priority:
+
+Set the order of devices your system tries to boot from,
+such as HDD, USB, CD/DVD, or Network.`,
+        `Integrated Peripherals:
+
+Configure onboard devices like audio, LAN, USB controllers,
+SATA ports, and other integrated components.`,
+        `PC Health Status:
+
+Monitor CPU temperature, fan speeds, voltages,
+and other hardware health indicators.`,
+        `Save & Exit Setup:
+
+Save any changes made in BIOS and restart the system.
+You can discard changes or exit without saving.`,
+      ];
+
+      function updateSelection() {
+        menuItems.forEach((item, idx) => {
+          item.classList.toggle("selected", idx === selectedIndex);
+          item.setAttribute(
+            "aria-selected",
+            idx === selectedIndex ? "true" : "false"
+          );
+          item.id = `item-${idx}`;
+        });
+        menu.setAttribute("aria-activedescendant", `item-${selectedIndex}`);
+      }
+
+      function enterInfoView() {
+        inInfoView = true;
+        menu.style.display = "none";
+        infoScreen.style.display = "block";
+        footer.classList.add("hidden");
+        infoScreen.textContent = detailedDescriptions[selectedIndex];
+        infoScreen.focus();
+      }
+
+      function exitInfoView() {
+        inInfoView = false;
+        menu.style.display = "flex";
+        infoScreen.style.display = "none";
+        footer.classList.remove("hidden");
+        updateSelection();
+        biosScreen.focus();
+      }
+
+      function hideAchievement() {
+        achievementShown = false;
+        achievementScreen.classList.add("hidden");
+        menu.style.display = "flex";
+        footer.classList.remove("hidden");
+        updateSelection();
+        biosScreen.focus();
+      }
+
+      biosScreen.addEventListener("keydown", (e) => {
+        if (achievementShown) {
+          hideAchievement();
+          e.preventDefault();
+          return;
+        }
+
+        if (inInfoView) {
+          if (e.key === "Escape") {
+            exitInfoView();
+            e.preventDefault();
+          }
+          return;
+        }
+
+        if (e.key === "ArrowDown") {
+          selectedIndex = (selectedIndex + 1) % menuItems.length;
+          updateSelection();
+          e.preventDefault();
+        } else if (e.key === "ArrowUp") {
+          selectedIndex =
+            (selectedIndex - 1 + menuItems.length) % menuItems.length;
+          updateSelection();
+          e.preventDefault();
+        } else if (e.key === "Enter") {
+          enterInfoView();
+          e.preventDefault();
+        } else if (e.key === "Escape") {
+          window.location.href = "index.html";
+          e.preventDefault();
+        }
+      });
+
+      // Al cargar, sólo mostrar logro y ocultar menú y footer
+      menu.style.display = "none";
+      footer.classList.add("hidden");
+      infoScreen.style.display = "none";
+
+      // Forzar foco en biosScreen para captar teclas
+      window.onload = () => {
+        biosScreen.focus();
+      };
+    </script>
+  </body>
+</html>

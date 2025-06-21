@@ -22,6 +22,12 @@
     setTimeout(function () {
       window.location.href = "login.html";
     }, 10000);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "F2") {
+        window.location.href = "bios.html";
+      }
+    });
   </script>
   <style>
     body {
