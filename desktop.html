@@ -6,14 +6,57 @@
     <title>WINDOWS - DESKTOP</title>
   </head>
   <body>
-    <a href="desktop_boom.html">
+    <a
+      href="#"
+      id="showTrickyBtn"
+      style="
+        display: inline-block;
+        width: 80px;
+        height: 104px;
+        margin: 16px;
+        text-decoration: none;
+      ">
       <div
         style="
           display: flex;
           flex-direction: column;
           align-items: center;
           width: 80px;
-          margin: 16px;
+          height: 104px;
+        ">
+        <img
+          src="Img/icons8-cursor-26.png"
+          alt="Show Tricky"
+          style="width: 48px; height: 48px" />
+        <span
+          style="
+            margin-top: 8px;
+            color: white;
+            text-shadow: 1px 1px 2px #000;
+            font-size: 14px;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          ">
+          ¡Click Me! Game
+        </span>
+      </div>
+    </a>
+    <a
+      href="desktop_boom.html"
+      style="
+        display: inline-block;
+        width: 80px;
+        height: 104px;
+        margin: 16px;
+        text-decoration: none;
+      ">
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 80px;
+          height: 104px;
         ">
         <img
           src="Img/Stop.png"
@@ -32,6 +75,78 @@
         </span>
       </div>
     </a>
+    <button id="trickyBtn" style="position: absolute; top: 50%; left: 50%">
+      ¡Click Me!
+    </button>
+    <script>
+      // Oculta el botón "Atrápame" al inicio
+      document.getElementById("trickyBtn").style.display = "none";
+      document
+        .getElementById("showTrickyBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("trickyBtn").style.display = "block";
+        });
+    </script>
+
+    <script>
+      const btn = document.getElementById("trickyBtn");
+      let attempts = 0;
+
+      btn.addEventListener("mouseover", () => {
+        // Mueve el botón a una posición aleatoria en la ventana
+        const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
+        attempts++;
+        if (attempts > 10) {
+          let msg = document.getElementById("trickyMsg");
+          if (!msg) {
+            msg = document.createElement("div");
+            msg.id = "trickyMsg";
+            msg.textContent = "¿Why you continue trying to click me?";
+            msg.style.position = "fixed";
+            msg.style.top = "20px";
+            msg.style.left = "50%";
+            msg.style.transform = "translateX(-50%)";
+            msg.style.background = "rgba(0,0,0,0.8)";
+            msg.style.color = "white";
+            msg.style.padding = "16px 24px";
+            msg.style.borderRadius = "8px";
+            msg.style.zIndex = "2000";
+            msg.style.fontFamily =
+              "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+            document.body.appendChild(msg);
+          }
+        }
+      });
+      btn.addEventListener("click", () => {
+        // Crear el div de logro desbloqueado
+        let logroDiv = document.createElement("div");
+        logroDiv.style.background = "#222";
+        logroDiv.style.color = "#fff";
+        logroDiv.style.padding = "24px 32px";
+        logroDiv.style.borderRadius = "16px";
+        logroDiv.style.boxShadow = "0 0 24px rgba(0,0,0,0.7)";
+        logroDiv.style.fontSize = "20px";
+        logroDiv.style.fontFamily =
+          "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+        logroDiv.style.textAlign = "center";
+        logroDiv.style.position = "fixed";
+        logroDiv.style.top = "50%";
+        logroDiv.style.left = "50%";
+        logroDiv.style.transform = "translate(-50%, -50%)";
+        logroDiv.style.zIndex = "3000";
+        logroDiv.innerHTML = `
+          🏆 NEW REACHMENT:
+          <br />
+          <em>You click the button</em>
+        `;
+        document.body.appendChild(logroDiv);
+        btn.disabled = true; // opcional para que no se pueda volver a clicar
+      });
+    </script>
     <div class="bottom-bar">
       <a href="desktop-menu.html">
         <img
@@ -68,7 +183,21 @@
       </a>
     </div>
   </body>
+
   <style>
+    #trickyBtn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
     body {
       background-image: url("Img/Background-Desktop.jpg");
       background-size: cover;
