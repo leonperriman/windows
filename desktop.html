@@ -5,6 +5,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WINDOWS - DESKTOP</title>
   </head>
+<style>
+  #fakeMenu {
+    position: fixed;
+    inset: 0;
+    background-color: #0078d7;
+    color: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  #menuScreen {
+    width: 350px;
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    text-align: left;
+  }
+  #menuScreen h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+  #menuScreen ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  #menuScreen ul li {
+    line-height: 2.5em;
+    cursor: pointer;
+  }
+  #menuScreen ul li:hover {
+    background-color: #005aee;
+    border-radius: 4px;
+  }
+  .achievement {
+    margin-top: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .hint {
+    margin-top: 15px;
+    font-size: 13px;
+    opacity: 0.8;
+    text-align: center;
+  }
+  .fake-screen {
+    width: 350px;
+    text-align: center;
+    color: white;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+  .task-manager {
+    width: 700px;
+    background-color: #0078d7;
+    color: white;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .task-header {
+    background-color: #005aee;
+    padding: 10px 15px;
+    font-weight: 600;
+    font-size: 20px;
+    user-select: none;
+  }
+  .tab-bar {
+    display: flex;
+    background-color: #0078d7;
+  }
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    user-select: none;
+  }
+  .tab.active {
+    border-bottom: 3px solid #005aee;
+    background-color: #005aee;
+  }
+  .task-content {
+    padding: 15px;
+    background-color: #0078d7;
+    overflow: auto;
+    max-height: 400px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+  }
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #005aee;
+    font-size: 14px;
+  }
+  th {
+    background-color: #005aee;
+  }
+  tr:hover {
+    background-color: #004a9f;
+  }
+  tr.selected {
+    background-color: #003a7d !important;
+  }
+  .buttons {
+    padding: 10px 15px;
+    background-color: #0078d7;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  button {
+    background-color: #005aee;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    user-select: none;
+  }
+  button:hover {
+    background-color: #004a9f;
+  }
+  #achievementPopup {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #004a9f;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    z-index: 10000;
+  }
+  #achievementPopup.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* Popup round user image */
+  #userPopup {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #004a9f;
+    padding: 20px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    line-height: 120px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    z-index: 10001;
+  }
+  #userPopup.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #switchUserScreen {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    color: white;
+  }
+  #switchUserScreen img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+  #statusMessage {
+    margin-top: 20px;
+    text-align: center;
+  }
+  #statusMessage img {
+    margin-top: 10px;
+    width: 80px;
+    height: 80px;
+  }
+</style>
   <body>
     <a
       href="#"
@@ -182,8 +389,205 @@
           style="height: 28px; width: auto" />
       </a>
     </div>
-  </body>
+  </div>
 
+<div id="fakeMenu" aria-modal="true" role="dialog" aria-labelledby="menuTitle">
+  <div id="menuScreen">
+    <h1 id="menuTitle">Windows Security</h1>
+    <ul>
+      <li tabindex="0" onclick="lockPC()">🔒 Lock</li>
+      <li tabindex="0" onclick="showScreen('switch')">🔄 Switch User</li>
+      <li tabindex="0" onclick="signOut()">🚪 Sign Out</li>
+      <li tabindex="0" onclick="showScreen('task')">🔧 Task Manager</li>
+      <li tabindex="0" onclick="closeFakeMenu()">❌ Cancel</li>
+    </ul>
+    <div class="achievement">
+      🏆 Achievement Unlocked: F2 Master
+    </div>
+    <p class="hint">Press ESC to return</p>
+  </div>
+
+  <div class="fake-screen" id="lockScreen" style="display:none;">
+    <div id="statusMessage">
+      <div id="statusText"></div>
+      <img id="statusImg" src="" alt="Status Image" />
+    </div>
+
+  </div>
+
+  <div class="fake-screen" id="switchScreen" style="display:none;">
+    <div id="switchUserScreen">
+      <img src="Img/icon-login.png" alt="User Image" />
+      <div>
+        <h2>User</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="fake-screen task-manager" id="taskScreen" style="display:none; flex-direction: column;">
+    <div class="task-header">Task Manager</div>
+    <div class="tab-bar">
+      <div class="tab active" data-tab="processes" onclick="switchTab(event)">Processes</div>
+      <div class="tab" data-tab="performance" onclick="switchTab(event)">Performance</div>
+      <div class="tab" data-tab="app-history" onclick="switchTab(event)">App history</div>
+      <div class="tab" data-tab="startup" onclick="switchTab(event)">Startup</div>
+      <div class="tab" data-tab="users" onclick="switchTab(event)">Users</div>
+      <div class="tab" data-tab="details" onclick="switchTab(event)">Details</div>
+      <div class="tab" data-tab="services" onclick="switchTab(event)">Services</div>
+    </div>
+    <div class="task-content" id="taskContent">
+      <table id="processTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>CPU</th>
+            <th>Memory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>explorer.exe</td>
+            <td>Running</td>
+            <td>1%</td>
+            <td>50 MB</td>
+          </tr>
+          <tr>
+            <td>chrome.exe</td>
+            <td>Running</td>
+            <td>5%</td>
+            <td>200 MB</td>
+          </tr>
+          <tr>
+            <td>discord.exe</td>
+            <td>Running</td>
+            <td>2%</td>
+            <td>150 MB</td>
+          </tr>
+          <tr>
+            <td>spotify.exe</td>
+            <td>Running</td>
+            <td>3%</td>
+            <td>120 MB</td>
+          </tr>
+          <tr>
+            <td>svchost.exe</td>
+            <td>Running</td>
+            <td>0%</td>
+            <td>30 MB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="buttons">
+      <button id="endTaskBtn">End Task</button>
+      <button onclick="closeFakeMenu()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="achievementPopup"></div>
+<div id="userPopup">User</div>
+
+<script>
+  let selectedRow = null;
+
+  function clearSelection() {
+    const rows = document.querySelectorAll('#processTable tbody tr');
+    rows.forEach(row => row.classList.remove('selected'));
+    selectedRow = null;
+  }
+
+  function attachRowClicks() {
+    const rows = document.querySelectorAll('#processTable tbody tr');
+    rows.forEach(row => {
+      row.addEventListener('click', () => {
+        clearSelection();
+        selectedRow = row;
+        row.classList.add('selected');
+      });
+    });
+  }
+
+  function showAchievement(msg) {
+    const popup = document.getElementById('achievementPopup');
+    popup.textContent = `🏆 Achievement Unlocked: ${msg}`;
+    popup.classList.add('show');
+    setTimeout(() => {
+      popup.classList.remove('show');
+    }, 3500);
+  }
+
+  document.getElementById('endTaskBtn').addEventListener('click', () => {
+    if (!selectedRow) {
+      alert('Please select a process to end.');
+      return;
+    }
+    selectedRow.style.display = 'none';
+    showAchievement('Task Terminator!');
+    clearSelection();
+  });
+
+  function showScreen(type) {
+    document.getElementById("menuScreen").style.display = "none";
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("switchScreen").style.display = "none";
+    document.getElementById("taskScreen").style.display = "none";
+
+    if (type === "lock") {
+      document.getElementById("lockScreen").style.display = "block";
+    } else if (type === "switch") {
+      document.getElementById("switchScreen").style.display = "flex";
+    } else if (type === "task") {
+      document.getElementById("taskScreen").style.display = "flex";
+      attachRowClicks();
+    } else if (type === "menu") {
+      document.getElementById("menuScreen").style.display = "block";
+    }
+  }
+
+  function closeFakeMenu() {
+    document.getElementById('fakeMenu').style.display = 'none';
+  }
+
+  function lockPC() {
+    showScreen('lock');
+    const statusText = document.getElementById('statusText');
+    const statusImg = document.getElementById('statusImg');
+    statusText.textContent = 'Locking...';
+    statusImg.src = 'Img/windows11-loading.gif';
+    statusImg.alt = 'Locking Icon';
+
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 3000);
+  }
+
+  function signOut() {
+    showScreen('lock');
+    const statusText = document.getElementById('statusText');
+    const statusImg = document.getElementById('statusImg');
+    statusText.textContent = 'Signing out...';
+    statusImg.src = 'Img/windows11-loading.gif';
+    statusImg.alt = 'Sign Out Icon';
+
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 3000);
+  }
+
+  // Cambios aquí: evento para abrir menú con F2
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'F2') {
+      e.preventDefault();
+      document.getElementById('fakeMenu').style.display = 'flex';
+      showScreen('menu');
+    } else if (e.key === 'Escape') {
+      closeFakeMenu();
+    }
+  });
+</script>
+  </body>
   <style>
     #trickyBtn {
       position: absolute;
