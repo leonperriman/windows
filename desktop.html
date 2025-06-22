@@ -65,98 +65,132 @@
   }
   .task-manager {
     width: 700px;
-    background-color: #0078d7;
-    color: white;
-    border-radius: 0;
-    box-shadow: none;
+    background-color: #f3f6fb;
+    color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
     display: flex;
     flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
   }
   .task-header {
-    background-color: #005aee;
-    padding: 10px 15px;
+    background-color: #f3f6fb;
+    padding: 18px 24px 8px 24px;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 22px;
+    color: #222;
+    border-bottom: 1px solid #e3e6eb;
     user-select: none;
+    letter-spacing: 0.5px;
   }
   .tab-bar {
     display: flex;
-    background-color: #0078d7;
+    background-color: #f3f6fb;
+    border-bottom: 1px solid #e3e6eb;
+    padding-left: 16px;
+    gap: 2px;
   }
   .tab {
-    padding: 10px 20px;
+    padding: 10px 24px 10px 24px;
     cursor: pointer;
-    color: white;
+    color: #222;
     border-bottom: 3px solid transparent;
-    font-weight: 600;
-    user-select: none;
+    font-weight: 500;
+    font-size: 15px;
+    background: none;
+    transition: background 0.2s, border-bottom 0.2s;
+    border-radius: 8px 8px 0 0;
+    margin-right: 2px;
   }
   .tab.active {
-    border-bottom: 3px solid #005aee;
-    background-color: #005aee;
+    border-bottom: 3px solid #0078d7;
+    background-color: #eaf1fb;
+    color: #0078d7;
   }
   .task-content {
-    padding: 15px;
-    background-color: #0078d7;
+    padding: 0;
+    background-color: #fff;
     overflow: auto;
-    max-height: 400px;
+    max-height: 340px;
   }
   table {
     width: 100%;
-    border-collapse: collapse;
-    color: white;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: #1a1a1a;
+    font-size: 15px;
+    background: #fff;
   }
   th, td {
-    padding: 8px 12px;
+    padding: 10px 16px;
     text-align: left;
-    border-bottom: 1px solid #005aee;
-    font-size: 14px;
+    border-bottom: 1px solid #e3e6eb;
+    font-size: 15px;
   }
   th {
-    background-color: #005aee;
+    background-color: #f3f6fb;
+    color: #222;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-bottom: 2px solid #e3e6eb;
   }
-  tr:hover {
-    background-color: #004a9f;
+  tr {
+    transition: background 0.15s;
+  }
+  tr:hover:not(.selected) {
+    background-color: #eaf1fb;
   }
   tr.selected {
-    background-color: #003a7d !important;
+    background-color: #d2e6fa !important;
   }
   .buttons {
-    padding: 10px 15px;
-    background-color: #0078d7;
+    padding: 14px 24px;
+    background-color: #f3f6fb;
     display: flex;
     justify-content: flex-end;
     gap: 10px;
+    border-top: 1px solid #e3e6eb;
   }
   button {
-    background-color: #005aee;
+    background-color: #0078d7;
     border: none;
     color: white;
-    padding: 6px 14px;
-    border-radius: 4px;
+    padding: 8px 22px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.3s;
+    font-size: 15px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: background-color 0.2s, box-shadow 0.2s;
     user-select: none;
+    outline: none;
   }
-  button:hover {
-    background-color: #004a9f;
+  button:hover, button:focus {
+    background-color: #005aee;
+    box-shadow: 0 2px 8px rgba(0,120,215,0.10);
   }
   #achievementPopup {
     position: fixed;
-    bottom: 30px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #004a9f;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 10px;
-    font-weight: 700;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    background: #eaf1fb;
+    color: #0078d7;
+    padding: 18px 36px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s;
     z-index: 10000;
+    border: 1.5px solid #e3e6eb;
+    letter-spacing: 0.5px;
   }
   #achievementPopup.show {
     opacity: 1;
@@ -168,21 +202,24 @@
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
-    background: #004a9f;
-    padding: 20px;
+    background: #eaf1fb;
+    padding: 0;
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    color: white;
+    color: #0078d7;
     font-weight: 700;
     font-size: 24px;
     text-align: center;
     line-height: 120px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s;
     z-index: 10001;
+    border: 1.5px solid #e3e6eb;
+    letter-spacing: 0.5px;
   }
   #userPopup.show {
     opacity: 1;
